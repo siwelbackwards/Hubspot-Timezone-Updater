@@ -1,6 +1,6 @@
 # HubSpot Timezone Updater
 
-This project automatically updates the timezone property of HubSpot contacts based on their country and city information using Llama 2 for to produce timezones
+This project automatically updates the timezone property of HubSpot contacts based on their country and city information using Llama 3.2 for to produce timezones
 ## Table of Contents 
 - [Setup](#setup) 
 - [Usage](#usage) 
