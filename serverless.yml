@@ -1,0 +1,22 @@
+service: hubspot-timezone-updater
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'}
+  environment:
+    HUBSPOT_API_KEY: ${ssm:/hubspot/api_key}
+
+functions:
+  update_timezone:
+    handler: src.main.lambda_handler
+    events:
+      - schedule: rate(1 day)
+    timeout: 900  # 15 minutes
+    memorySize: 3008  # 3008 MB, adjust as needed
+
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
