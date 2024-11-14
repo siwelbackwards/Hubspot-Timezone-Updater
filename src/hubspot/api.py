@@ -10,9 +10,9 @@ class HubSpotAPI:
             'Authorization': f'Bearer {self.api_key}',
             'Content-Type': 'application/json'
         }
-        response = requests.get(self.base_url, headers=headers, params={"properties": "country,city,timezone"})
+        response = requests.get(self.base_url, headers=headers, params={"properties": "country", "city", "hs_timezone"})
         contacts = response.json().get('results', [])
-        return [contact for contact in contacts if not contact['properties'].get('timezone') 
+        return [contact for contact in contacts if not contact['properties'].get('hs_timezone') 
                 and contact['properties'].get('country') and contact['properties'].get('city')]
 
     def update_contact_timezone(self, contact_id, timezone):
@@ -22,7 +22,7 @@ class HubSpotAPI:
         }
         data = {
             "properties": {
-                "timezone": timezone
+                "hs_timezone": timezone
             }
         }
         response = requests.patch(f'{self.base_url}/{contact_id}', headers=headers, json=data)
